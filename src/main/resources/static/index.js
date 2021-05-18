@@ -1,4 +1,4 @@
-$.get("http://localhost:8080/employees/", function (employees) {
+$.get("/employees/", function (employees) {
     if (employees) {
         for (var i = 0; i < employees.length; i++) {
             $('#container').append("<tr onclick='updateData(" + employees[i].id + ")'><td>" + employees[i].id + " </td>" +
@@ -16,7 +16,7 @@ $.get("http://localhost:8080/employees/", function (employees) {
 var updateData = function (id) {
     $('#detailsBackground').removeClass('d-none');
     $('#details').addClass('d-none');
-    $.get("http://localhost:8080/employees/details/" + id, function (employeeDetails) {
+    $.get("/employees/details/" + id, function (employeeDetails) {
         if (employeeDetails) {
             $('#name').val(employeeDetails.firstName);
             $('#lastName').val(employeeDetails.lastName);
@@ -42,7 +42,7 @@ var sendEmail = function () {
     $('#emailBackground').removeClass('d-none');
     $('#details').addClass('d-none');
     $.post({
-        url: 'http://localhost:8080/employees/mail/',
+        url: '/employees/mail/',
         data: JSON.stringify({
             email: $('#exampleInputEmail').val(),
             employeeId: $('#employeeId').val(),
@@ -62,7 +62,7 @@ var generateReport = function () {
     $('#generatingReport').removeClass('d-none');
     $('#details').addClass('d-none');
     $.post({
-        url: 'http://localhost:8080/employees/report/',
+        url: '/employees/report/',
         data: JSON.stringify({reportMessage: $('#messageId').val(), employeeId: $('#employeeId').val()}),
         contentType: 'application/json; charset=utf-8'
     }).done(function (data) {
