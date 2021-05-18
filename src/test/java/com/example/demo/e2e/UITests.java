@@ -19,10 +19,7 @@ public class UITests {
 
     @Test
     public void uitest() throws Exception {
-
-
-        String[] args1 = {"--spring.profiles.active=test"};
-        ConfigurableApplicationContext context = DemoApplication.test(args1);
+//        String[] args1 = {"--spring.profiles.active=test"};
 
         try {
             System.out.println("waiting while spring is starting...");
@@ -32,7 +29,7 @@ public class UITests {
             System.setProperty("webdriver.chrome.driver", chromeDriverPath);
             WebDriver driver = new PhantomJSDriver();
             System.out.println("opening url");
-            driver.get("http://localhost:8080/");
+            driver.get("http://185.204.3.211:8080/");
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             System.out.println("searching for 2nd record in url");
 
@@ -59,12 +56,11 @@ public class UITests {
             driver.quit();
             System.out.println("Successfully run UI TEST!");
             Thread.sleep(2000);
-            context.close();
 
         } catch (Exception e) {
             System.out.println("Error running test: " + e.getMessage());
-            context.close();
         }
+
     }
 
     public static void main2(String[] args) throws Exception {

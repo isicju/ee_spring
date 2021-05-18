@@ -27,7 +27,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     public DataSource service() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setPassword("secret_password");
-        dataSource.setUser("myuser");
+        dataSource.setUser("root");
         dataSource.setURL("jdbc:mysql://185.204.3.211:3306/hr?useUnicode=true&serverTimezone=UTC");
         return dataSource;
     }
