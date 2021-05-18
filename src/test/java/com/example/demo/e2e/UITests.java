@@ -63,7 +63,7 @@ public class UITests {
 
         } catch (Exception e) {
             System.out.println("Error running test: " + e.getMessage());
-            System.exit(1);
+            context.close();
         }
     }
 
