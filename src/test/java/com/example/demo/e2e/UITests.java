@@ -28,7 +28,7 @@ public class UITests {
             System.out.println("waiting while spring is starting...");
             Thread.sleep(8000);
             System.out.println("initializing phantom js");
-            String chromeDriverPath = (new File("src/test/resources").getAbsolutePath() + "\\phantomjs.exe");
+            String chromeDriverPath = (new File("src/test/resources").getAbsolutePath() + "\\phantomjs");
             System.setProperty("webdriver.chrome.driver", chromeDriverPath);
             WebDriver driver = new PhantomJSDriver();
             System.out.println("opening url");
