@@ -32,7 +32,7 @@ RUN apt-get update &&  apt-get install -y build-essential chrpath libssl-dev lib
  ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin && \
  chmod 755 /usr/local/bin/phantomjs
 
-RUN git clone https://github.com/isicju/ee_spring.git && cd ee_spring && git checkout no_ui_tests
+RUN git clone https://github.com/isicju/ee_spring.git && cd ee_spring && git fetch && git checkout ui_test_active
 
 
 EXPOSE 8080

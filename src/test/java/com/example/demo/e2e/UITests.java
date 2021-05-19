@@ -20,9 +20,6 @@ public class UITests {
 
     @Test
     public void uitest() throws Exception {
-
-
-        try {
         String[] args1 = {"--spring.profiles.active=test"};
             DemoApplication.main(args1);
 
@@ -62,11 +59,6 @@ public class UITests {
             driver.quit();
             System.out.println("Successfully run UI TEST!");
             Thread.sleep(2000);
-
-        } catch (Exception e) {
-            System.out.println("Error running test: " + e.getMessage());
-        }
-
     }
 
 //    public static void main2(String[] args) throws Exception {
