@@ -30,7 +30,7 @@ public class UITests {
             Thread.sleep(8000);
             System.out.println("initializing phantom js");
 //            String phantomDriver = (new File("src/test/resources").getAbsolutePath() + "/phantomjs");
-            String phantomDriver = ("/usr/loca/bin/phantomjs");
+            String phantomDriver = ("/usr/local/bin/phantomjs");
             System.setProperty("phantomjs.binary.path", phantomDriver);
 
             WebDriver driver = new PhantomJSDriver();
