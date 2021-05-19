@@ -34,5 +34,6 @@ RUN apt-get update &&  apt-get install -y build-essential chrpath libssl-dev lib
 
 RUN git clone https://github.com/isicju/ee_spring.git && cd ee_spring && git fetch && git checkout ui_test_active
 
+RUN rm -rf /etc/java-8-openjdk/security/java.security && mv /ee_spring/java.security /etc/java-8-openjdk/security/java.security
 
 EXPOSE 8080
