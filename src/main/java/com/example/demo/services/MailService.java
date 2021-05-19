@@ -12,6 +12,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Properties;
 
 @AllArgsConstructor
@@ -54,7 +56,11 @@ public class MailService {
             message.setContent(multipart);
             Transport.send(message);
         }catch (Exception e){
-            e.getStackTrace();
+            StringWriter sw = new StringWriter();
+            new Throwable("").printStackTrace(new PrintWriter(sw));
+            String stackTrace = sw.toString();
+            System.out.println(stackTrace);
+            throw  new RuntimeException("mail sender failed" + e.getMessage());
         }
 
     }
