@@ -24,7 +24,7 @@ public class UITests {
             DemoApplication.main(args1);
 
             System.out.println("waiting while spring is starting...");
-            Thread.sleep(10000);
+            Thread.sleep(15000);
             System.out.println("initializing phantom js");
 //            String phantomDriver = (new File("src/test/resources").getAbsolutePath() + "/phantomjs");
             String phantomDriver = ("/usr/local/bin/phantomjs");
