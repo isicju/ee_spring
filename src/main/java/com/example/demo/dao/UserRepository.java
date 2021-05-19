@@ -25,15 +25,15 @@ public class UserRepository {
             "       l.postal_code, " +
             "       m.first_name AS manager_first_name,  " +
             "       m.last_name AS manager_last_name " +
-            "FROM employees e " +
-            "INNER JOIN departments d ON e.department_id = d.department_id " +
-            "INNER JOIN jobs j ON e.job_id = j.job_id " +
-            "INNER JOIN locations l ON d.location_id = l.location_id " +
-            "LEFT JOIN employees m ON e.manager_id = m.employee_id " +
+            "FROM hr.employees e " +
+            "INNER JOIN hr.departments d ON e.department_id = d.department_id " +
+            "INNER JOIN hr.jobs j ON e.job_id = j.job_id " +
+            "INNER JOIN hr.locations l ON d.location_id = l.location_id " +
+            "LEFT JOIN hr.employees m ON e.manager_id = m.employee_id " +
             "WHERE e.employee_id = ?";
 
     public List<Employee> getEmployees() {
-        String query = "SELECT * FROM employees";
+        String query = "SELECT * FROM hr.employees";
         List<Employee> employees = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()

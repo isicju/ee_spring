@@ -23,7 +23,7 @@ public class AppConfiguration  {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setPassword("secret_password");
         dataSource.setUser("root");
-        dataSource.setURL("jdbc:mysql://51.124.98.77:3306/hr?useUnicode=true&serverTimezone=UTC");
+        dataSource.setURL("jdbc:mysql://51.124.98.77:3306/?useUnicode=true&serverTimezone=UTC");
         return dataSource;
     }
 
@@ -32,7 +32,7 @@ public class AppConfiguration  {
     public DataSource embeddedDataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:hr;DB_CLOSE_DELAY=-1;MODE=MYSQL");
+        dataSource.setUrl("jdbc:h2:mem:hr;DB_CLOSE_DELAY=-1;MODE=MYSQL;DATABASE_TO_UPPER=false");
         dataSource.setUsername("sa");
         dataSource.setPassword("sa");
 
