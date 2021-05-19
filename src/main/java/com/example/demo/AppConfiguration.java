@@ -44,7 +44,7 @@ public class AppConfiguration  {
         return dataSource;
     }
 
-    @Bean()
+    @Bean("emailProperties")
     public Properties emailProperties(){
         Properties properties = new Properties();
 
@@ -53,10 +53,17 @@ public class AppConfiguration  {
         properties.setProperty("mail.smtp.ssl.enable", "true");
         properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.smtp.ssl.trust", "*");
-        properties.put("mail.smtp.auth", "true");
         properties.put("fromEmail", "testemailserver202165@yahoo.com");
         properties.put("appPassword", "liixhnqccckjjbva");
+
+        properties.put("mail.smtp.host", "smtp.mail.yahoo.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", true);
+        properties.put("mail.smtp.socketFactory.port", "587");
+        properties.put("mail.smtp.socketFactory.fallback", "false");
+        properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
         return properties;
     }
 
