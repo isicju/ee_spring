@@ -16,8 +16,4 @@ public class DemoApplication {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
     }
 
-    public static ConfigurableApplicationContext test(String[] args) {
-      return  SpringApplication.run(DemoApplication.class, args);
-    }
-
 }

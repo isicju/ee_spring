@@ -20,13 +20,16 @@ public class UITests {
 
     @Test
     public void uitest() throws Exception {
-//        String[] args1 = {"--spring.profiles.active=test"};
+
 
         try {
+        String[] args1 = {"--spring.profiles.active=test"};
+            DemoApplication.main(args1);
+
             System.out.println("waiting while spring is starting...");
             Thread.sleep(8000);
             System.out.println("initializing phantom js");
-            String phantomDriver = (new File("src/test/resources").getAbsolutePath() + "\\phantomjs");
+            String phantomDriver = (new File("src/test/resources").getAbsolutePath() + "/phantomjs");
             System.setProperty("phantomjs.binary.path", phantomDriver);
 
             WebDriver driver = new PhantomJSDriver();
