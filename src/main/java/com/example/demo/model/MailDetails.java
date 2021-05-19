@@ -21,7 +21,6 @@ public class MailDetails {
                 throw new IllegalRequestInputException("{\"error\":\"provide valid reportMessage!\"}");
             }
 
-
             if(mailDetails.getEmployeeId() == null || mailDetails.getEmployeeId() < 0){
                 throw new IllegalRequestInputException("{\"error\":\"provide valid employee id!\"}");
             }
