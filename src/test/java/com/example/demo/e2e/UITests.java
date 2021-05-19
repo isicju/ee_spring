@@ -26,11 +26,12 @@ public class UITests {
             System.out.println("waiting while spring is starting...");
             Thread.sleep(8000);
             System.out.println("initializing phantom js");
-            String chromeDriverPath = (new File("src/test/resources").getAbsolutePath() + "\\phantomjs");
-            System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+            String phantomDriver = (new File("src/test/resources").getAbsolutePath() + "\\phantomjs");
+            System.setProperty("phantomjs.binary.path", phantomDriver);
+
             WebDriver driver = new PhantomJSDriver();
             System.out.println("opening url");
-            driver.get("http://185.204.3.211:8080/");
+            driver.get("http://51.124.98.77:8080/");
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             System.out.println("searching for 2nd record in url");
 
