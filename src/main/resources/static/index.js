@@ -55,6 +55,8 @@ var sendEmail = function () {
         $('#details').removeClass('d-none');
     }).fail(function () {
         alert('Error sending report!')
+        $('#emailBackground').addClass('d-none');
+        $('#details').removeClass('d-none');
     })
 };
 
