@@ -52,8 +52,8 @@ public class AppConfiguration  {
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.auth", "true");
-        properties.put("fromEmail", "testemailserver202165@yahoo.com");
-        properties.put("appPassword", "liixhnqccckjjbva");
+        properties.put("fromEmail", "emailforserver2021@yahoo.com");
+        properties.put("appPassword", "ykbhpninutedzvdl");
 
         return properties;
     }
