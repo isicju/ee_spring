@@ -57,7 +57,7 @@ public class MailService {
             Transport.send(message);
         }catch (Exception e){
             StringWriter sw = new StringWriter();
-            new Throwable("").printStackTrace(new PrintWriter(sw));
+            e.printStackTrace(new PrintWriter(sw));
             String stackTrace = sw.toString();
             System.out.println(stackTrace);
             throw  new RuntimeException("mail sender failed" + e.getMessage());
