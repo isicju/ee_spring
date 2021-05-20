@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.activation.DataHandler;
@@ -12,10 +12,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Properties;
 
+@Log4j2
 @AllArgsConstructor
 @Service
 public class MailService {
@@ -23,7 +23,7 @@ public class MailService {
     private final Properties emailProperties;
 
     public void sendEmail(String toEmail) throws Exception {
-        try{
+        try {
             String fromEmail = emailProperties.getProperty("fromEmail");
             String yahooAccountAppPassword = emailProperties.getProperty("appPassword");
 
@@ -54,15 +54,17 @@ public class MailService {
             messageBodyPart.setFileName(filename);
             multipart.addBodyPart(messageBodyPart);
             message.setContent(multipart);
-            Transport.send(message);
-        }catch (Exception e){
+            send(message);
+        } catch (Exception e) {
             StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
             String stackTrace = sw.toString();
-            System.out.println(stackTrace);
-            throw  new RuntimeException("mail sender failed" + e.getMessage());
+            log.error("mail sender failed " + stackTrace);
+            throw new RuntimeException("mail sender failed" + e.getMessage());
         }
+    }
 
+    public void send(Message message) throws Exception{
+        Transport.send(message);
     }
 
 }

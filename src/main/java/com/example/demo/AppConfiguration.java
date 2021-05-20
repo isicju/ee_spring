@@ -44,6 +44,7 @@ public class AppConfiguration  {
         return dataSource;
     }
 
+    @Profile({"test","prod"})
     @Bean("emailProperties")
     public Properties emailProperties(){
         Properties properties = new Properties();
