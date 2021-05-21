@@ -22,7 +22,7 @@ public class MailService {
 
     private final Properties emailProperties;
 
-    public void sendEmail(String toEmail) throws Exception {
+    public String sendEmail(String toEmail) {
         try {
             String fromEmail = emailProperties.getProperty("fromEmail");
             String yahooAccountAppPassword = emailProperties.getProperty("appPassword");
@@ -61,6 +61,7 @@ public class MailService {
             log.error("mail sender failed " + stackTrace);
             throw new RuntimeException("mail sender failed" + e.getMessage());
         }
+        return "Email sent!";
     }
 
     public void send(Message message) throws Exception{

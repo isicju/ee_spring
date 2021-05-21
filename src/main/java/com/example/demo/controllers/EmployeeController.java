@@ -10,7 +10,6 @@ import com.example.demo.services.PdfGeneratorService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,19 +45,13 @@ public class EmployeeController {
 
     @PostMapping(value = "/mail")
     public @ResponseBody
-    ResponseEntity sendPdfViaEmail(@RequestBody String mailDetailsJson) throws Exception {
-        log.info("mail body: " + mailDetailsJson);
-        System.out.println("mail body: " + mailDetailsJson);
+    ResponseEntity sendPdfViaEmail(@RequestBody String mailDetailsJson) {
         MailDetails mailDetails = MailDetails.buildAndValidate(mailDetailsJson);
         EmployeeDetails employeeDetails =
                 userRepository.getEmployeeFullDetails(mailDetails.getEmployeeId());
-        log.info("mail employee details: " + employeeDetails);
-        System.out.println("mail employee details: " + employeeDetails);
         pdfService.generatePdf(employeeDetails, mailDetails.getReportMessage());
-        System.out.println("generating pdf done " + employeeDetails);
-        System.out.println("sending email to  " + mailDetails.getEmail());
-        mailService.sendEmail(mailDetails.getEmail());
-        return ResponseEntity.status(200).build();
+        String status = mailService.sendEmail(mailDetails.getEmail());
+        return ResponseEntity.status(200).body("{\"status\":\"" + status + "\"}");
     }
 
 }

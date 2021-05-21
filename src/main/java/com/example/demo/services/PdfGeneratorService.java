@@ -21,7 +21,7 @@ import static java.awt.Color.GREEN;
 public class PdfGeneratorService {
     public static final String DEST = "hello.pdf";
 
-    public String generatePdf(EmployeeDetails employeeDetails, String message) {
+    public String  generatePdf(EmployeeDetails employeeDetails, String message) {
         try {
             File file = new File(DEST);
             if (!file.exists()) {
