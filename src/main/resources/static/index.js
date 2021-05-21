@@ -32,34 +32,6 @@ var updateData = function (id) {
     });
 };
 
-var onKeyDown = function () {
-    var emailValue = $('#exampleInputEmail').val();
-    $("#sendReport").attr("disabled", !(emailValue.indexOf('@') !== -1));
-};
-
-var sendEmail = function () {
-
-    $('#emailBackground').removeClass('d-none');
-    $('#details').addClass('d-none');
-    $.post({
-        url: '/employees/mail/',
-        data: JSON.stringify({
-            email: $('#exampleInputEmail').val(),
-            employeeId: $('#employeeId').val(),
-            reportMessage: $('#messageId').val()
-        }),
-        contentType: 'application/json; charset=utf-8'
-    }).done(function () {
-        alert('Email was sent!');
-        $('#emailBackground').addClass('d-none');
-        $('#details').removeClass('d-none');
-    }).fail(function () {
-        alert('Error sending report!')
-        $('#emailBackground').addClass('d-none');
-        $('#details').removeClass('d-none');
-    })
-};
-
 var generateReport = function () {
     $('#generatingReport').removeClass('d-none');
     $('#details').addClass('d-none');

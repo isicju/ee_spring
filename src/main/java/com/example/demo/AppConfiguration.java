@@ -17,7 +17,6 @@ import java.util.Properties;
 @Configuration
 public class AppConfiguration  {
 
-    @Profile("prod")
     @Bean
     public DataSource prodDataSource() {
         MysqlDataSource dataSource = new MysqlDataSource();
@@ -27,24 +26,7 @@ public class AppConfiguration  {
         return dataSource;
     }
 
-    @Profile("test")
-    @Bean("h2DataSouce")
-    public DataSource embeddedDataSource(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:hr;DB_CLOSE_DELAY=-1;MODE=MYSQL;DATABASE_TO_UPPER=false");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("sa");
 
-        // schema init
-        Resource initSchema = new ClassPathResource("scripts/schema-h2.sql");
-        DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
-        DatabasePopulatorUtils.execute(databasePopulator, dataSource);
-
-        return dataSource;
-    }
-
-    @Profile({"test","prod"})
     @Bean("emailProperties")
     public Properties emailProperties(){
         Properties properties = new Properties();
