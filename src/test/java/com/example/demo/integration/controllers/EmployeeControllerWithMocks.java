@@ -2,10 +2,13 @@ package com.example.demo.integration.controllers;
 
 import com.example.demo.controllers.EmployeeController;
 import com.example.demo.dao.Employee;
+import com.example.demo.dao.EmployeeDetails;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.services.MailService;
 import com.example.demo.services.PdfGeneratorService;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,11 +19,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -38,6 +44,31 @@ class EmployeeControllerWithMocks {
 
     @MockBean
     MailService mailService;
+
+    @MockBean
+    PdfGeneratorService pdfService;
+
+    @Test
+    public void getAllEmployees() throws Exception {
+        mockMvc.perform(post("http://localhost:8080/employees/report")
+                .contentType("application/json")
+                .content("{\"reportMessage\": \"blabla\", \"employeeId\":\"103\"}"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
+
+        ArgumentCaptor<Integer> employeeCaptureId = ArgumentCaptor.forClass(Integer.class);
+        ArgumentCaptor<EmployeeDetails> employeeCapture = ArgumentCaptor.forClass(EmployeeDetails.class);
+
+        Mockito.verify(userRepository).getEmployeeFullDetails(employeeCaptureId.capture());
+        Mockito.verify(pdfService).generatePdf(employeeCapture.capture(), any());
+
+        assertEquals(103,employeeCaptureId.getValue().intValue());
+
+        assertEquals("Alexander",employeeCapture.getValue().getFirstName());
+        assertEquals("Hunold",employeeCapture.getValue().getLastName());
+        assertEquals("Programmer",employeeCapture.getValue().getJobTitle());
+        assertEquals(103,employeeCapture.getValue().getId().longValue());
+    }
 
     @Test
     public void getAllEmployeesNone() throws Exception{
@@ -74,7 +105,7 @@ class EmployeeControllerWithMocks {
     }
 
     @Test
-    public void getAllEmployeesOneEmployee() throws Exception{
+    void getAllEmployeesOneEmployee() throws Exception{
         List<Employee> employeeList = new ArrayList<>();
         employeeList.add(Employee.builder()
                 .firstName("John")

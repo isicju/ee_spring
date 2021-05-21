@@ -66,6 +66,7 @@ class EmployeeControllerNoMocks {
                 .andExpect(jsonPath("$.location",notNullValue()));
     }
 
+
     @Test
     public void getEmployeeDetailsNotExist() throws Exception {
         mockMvc.perform(get("http://localhost:8080/employees/details/")

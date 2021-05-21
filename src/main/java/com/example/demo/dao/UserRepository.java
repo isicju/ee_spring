@@ -58,29 +58,28 @@ public class UserRepository {
     }
 
     public EmployeeDetails getEmployeeFullDetails(Integer id) {
-//        try (Connection conn = dataSource.getConnection();
-//             PreparedStatement statement = conn.prepareStatement(EMPLOYEE_DETAILS)) {
-//            statement.setInt(1, id);
-//            ResultSet rs = statement.executeQuery();
-//            rs.next();
-//            return EmployeeDetails.builder()
-//                    .id(rs.getInt("employee_id"))
-//                    .firstName(rs.getString("first_name"))
-//                    .lastName(rs.getString("last_name"))
-//                    .jobTitle(rs.getString("job_title"))
-//                    .departmentName(rs.getString("department_name"))
-//                    .salary(rs.getInt("salary"))
-//                    .id(rs.getInt("employee_id"))
-//                    .location(rs.getString("city") + ", " +
-//                            rs.getString("street_address") + ", " +
-//                            rs.getString("postal_code"))
-//                    .managerName(rs.getString("manager_first_name") + ", "
-//                            + rs.getString("manager_last_name"))
-//                    .build();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-        return null;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement(EMPLOYEE_DETAILS)) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return EmployeeDetails.builder()
+                    .id(rs.getInt("employee_id"))
+                    .firstName(rs.getString("first_name"))
+                    .lastName(rs.getString("last_name"))
+                    .jobTitle(rs.getString("job_title"))
+                    .departmentName(rs.getString("department_name"))
+                    .salary(rs.getInt("salary"))
+                    .id(rs.getInt("employee_id"))
+                    .location(rs.getString("city") + ", " +
+                            rs.getString("street_address") + ", " +
+                            rs.getString("postal_code"))
+                    .managerName(rs.getString("manager_first_name") + ", "
+                            + rs.getString("manager_last_name"))
+                    .build();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
