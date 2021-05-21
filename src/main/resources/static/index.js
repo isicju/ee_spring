@@ -50,13 +50,18 @@ var sendEmail = function () {
         }),
         contentType: 'application/json; charset=utf-8'
     }).done(function () {
-        alert('Email was sent!');
         $('#emailBackground').addClass('d-none');
         $('#details').removeClass('d-none');
+
+        $('#sendReport').removeClass('btn-primary');
+        $('#sendReport').addClass('btn-success');
+
     }).fail(function () {
-        alert('Error sending report!')
         $('#emailBackground').addClass('d-none');
         $('#details').removeClass('d-none');
+
+        $('#sendReport').removeClass('btn-primary');
+        $('#sendReport').addClass('btn-danger');
     })
 };
 

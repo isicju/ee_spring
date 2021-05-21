@@ -20,50 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UITests {
 
-//    @Test
-//    public void uitest() throws Exception {
-//        String[] args1 = {"--spring.profiles.active=test"};
-//            DemoApplication.main(args1);
-//
-//            System.out.println("waiting while spring is starting...");
-//            Thread.sleep(15000);
-//            System.out.println("initializing phantom js");
-////            String phantomDriver = (new File("src/test/resources").getAbsolutePath() + "/phantomjs");
-//            String phantomDriver = ("/usr/local/bin/phantomjs");
-//            System.setProperty("phantomjs.binary.path", phantomDriver);
-//
-//            WebDriver driver = new PhantomJSDriver();
-//            System.out.println("opening url");
-//            driver.get("http://51.124.98.77:8080/");
-//            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//            System.out.println("searching for 2nd record in url");
-//
-//            WebElement secondRecord = driver.findElement(By.xpath("//table/tbody/tr[2]"));
-//            secondRecord.click();
-//            WebElement commentsToReport = driver.findElement(By.id("messageId"));
-//            commentsToReport.click();
-//            commentsToReport.sendKeys("some details for report from ui test");
-//
-//            WebElement emailAddress = driver.findElement(By.id("exampleInputEmail"));
-//            emailAddress.click();
-//            emailAddress.sendKeys("isicju@gmail.com");
-//
-//            JavascriptExecutor js = (JavascriptExecutor) driver;
-//            js.executeScript("window.scrollBy(0,250)", "");
-//
-//            WebElement sendReportButton = driver.findElement(By.id("sendReport"));
-//            Actions actions = new Actions(driver);
-//            Thread.sleep(2000);
-//            actions.moveToElement(sendReportButton).perform();
-//
-//            sendReportButton.click();
-//
-//            driver.quit();
-//            System.out.println("Successfully run UI TEST!");
-//            Thread.sleep(2000);
-//    }
-
-    public static void main2(String[] args) throws Exception {
+    @Test
+    public void phantomjs() throws Exception {
+        String[] args1 = {"--spring.profiles.active=test"};
+        ConfigurableApplicationContext ctx =  SpringApplication.run(DemoApplication.class, args1);
         String chromeDriverPath = (new File("src/test/resources").getAbsolutePath() + "\\phantomjs.exe");
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         WebDriver driver = new PhantomJSDriver();
@@ -71,7 +31,31 @@ public class UITests {
         String secondTableRecord = "//table/tbody/tr[2]";
         WebElement secondRecord = driver.findElement(By.xpath(secondTableRecord));
         System.out.println(secondRecord.getText());
+        secondRecord.click();
+        Thread.sleep(1000);
+        WebElement commentsToReport = driver.findElement(By.id("messageId"));
+        commentsToReport.click();
+        commentsToReport.sendKeys("some details for report");
+
+        Thread.sleep(1000);
+
+        WebElement emailAddress = driver.findElement(By.id("exampleInputEmail"));
+        emailAddress.click();
+        emailAddress.sendKeys("isicju@gmail.com");
+        Thread.sleep(1000);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,250)", "");
+        Thread.sleep(1000);
+        WebElement sendReportButton = driver.findElement(By.id("sendReport"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(sendReportButton).perform();
+        sendReportButton.click();
+        Thread.sleep(10000);
+        assertTrue(sendReportButton.getAttribute("class").contains("btn-success"));
+        Thread.sleep(10000);
+        ctx.close();
         driver.quit();
+
     }
 
     @Test
@@ -89,24 +73,20 @@ public class UITests {
         WebElement commentsToReport = driver.findElement(By.id("messageId"));
         commentsToReport.click();
         commentsToReport.sendKeys("some details for report");
-
         WebElement emailAddress = driver.findElement(By.id("exampleInputEmail"));
         emailAddress.click();
         emailAddress.sendKeys("isicju@gmail.com");
-
+        Thread.sleep(1000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,250)", "");
-
+        Thread.sleep(1000);
         WebElement sendReportButton = driver.findElement(By.id("sendReport"));
         Actions actions = new Actions(driver);
         actions.moveToElement(sendReportButton).perform();
         sendReportButton.click();
-
         Thread.sleep(10000);
-        String message = driver.switchTo().alert().getText();
-
-        assertTrue(message.contains("Email was sent"));
-
+        assertTrue(sendReportButton.getAttribute("class").contains("btn-success"));
+        Thread.sleep(10000);
         ctx.close();
         driver.quit();
     }
