@@ -2,6 +2,7 @@ package com.example.demo.unit;
 
 import com.example.demo.model.ReportRequest;
 import com.example.demo.validation.IllegalRequestInputException;
+import com.google.gson.JsonSyntaxException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,9 +17,9 @@ public class ReportRequestTest {
         assertNotNull(reportRequest.getEmployeeId());
     }
 
-    @Test
+    @Test()
     public void invalidParsingReportRequest(){
-        assertThrows(IllegalRequestInputException.class,()->{
+        assertThrows(IllegalRequestInputException.class, ()->{
             String validRequest = "{\"reportMessage\":\"blaloyeeId\":\"123\"}";
             ReportRequest reportRequest = ReportRequest.buildAndValidate(validRequest);
         });
