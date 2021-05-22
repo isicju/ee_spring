@@ -3,6 +3,13 @@ package com.example.demo;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -10,6 +17,7 @@ import java.util.Properties;
 @Configuration
 public class AppConfiguration  {
 
+    @Profile("prod")
     @Bean
     public DataSource prodDataSource() {
         MysqlDataSource dataSource = new MysqlDataSource();
@@ -19,7 +27,7 @@ public class AppConfiguration  {
         return dataSource;
     }
 
-
+    @Profile({"test","prod"})
     @Bean("emailProperties")
     public Properties emailProperties(){
         Properties properties = new Properties();

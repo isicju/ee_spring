@@ -13,7 +13,17 @@ public class ReportRequest {
     public static ReportRequest buildAndValidate(String json) {
         try {
             Gson gson = new Gson();
-            return gson.fromJson(json, ReportRequest.class);
+            ReportRequest reportRequest = gson.fromJson(json, ReportRequest.class);
+
+            if(reportRequest.getReportMessage() == null){
+                throw new IllegalRequestInputException("{\"error\":\"provide valid reportMessage!\"}");
+            }
+
+            if(reportRequest.getEmployeeId() == null || reportRequest.getEmployeeId() < 0){
+                throw new IllegalRequestInputException("{\"error\":\"provide valid employee id!\"}");
+            }
+
+            return reportRequest;
         } catch (JsonSyntaxException e) {
             throw new IllegalRequestInputException("{\"error\": \"body is not valid json\"");
         }

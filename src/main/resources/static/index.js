@@ -32,6 +32,39 @@ var updateData = function (id) {
     });
 };
 
+var onKeyDown = function () {
+    var emailValue = $('#exampleInputEmail').val();
+    $("#sendReport").attr("disabled", !(emailValue.indexOf('@') !== -1));
+};
+
+var sendEmail = function () {
+
+    $('#emailBackground').removeClass('d-none');
+    $('#details').addClass('d-none');
+    $.post({
+        url: '/employees/mail/',
+        data: JSON.stringify({
+            email: $('#exampleInputEmail').val(),
+            employeeId: $('#employeeId').val(),
+            reportMessage: $('#messageId').val()
+        }),
+        contentType: 'application/json; charset=utf-8'
+    }).done(function () {
+        $('#emailBackground').addClass('d-none');
+        $('#details').removeClass('d-none');
+
+        $('#sendReport').removeClass('btn-primary');
+        $('#sendReport').addClass('btn-success');
+
+    }).fail(function () {
+        $('#emailBackground').addClass('d-none');
+        $('#details').removeClass('d-none');
+
+        $('#sendReport').removeClass('btn-primary');
+        $('#sendReport').addClass('btn-danger');
+    })
+};
+
 var generateReport = function () {
     $('#generatingReport').removeClass('d-none');
     $('#details').addClass('d-none');
