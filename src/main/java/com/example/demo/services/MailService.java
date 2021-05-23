@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.activation.DataHandler;
@@ -20,6 +21,7 @@ import java.util.Properties;
 @Service
 public class MailService {
 
+    @Qualifier("emailProperties")
     private final Properties emailProperties;
 
     public String sendEmail(String toEmail) {
