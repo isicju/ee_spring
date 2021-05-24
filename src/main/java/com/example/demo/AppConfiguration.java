@@ -47,6 +47,7 @@ public class AppConfiguration {
     @Profile("test")
     @Bean("h2DataSouce")
     public DataSource embeddedDataSource() {
+        System.out.println("initializing database...");;
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:mem:hr;DB_CLOSE_DELAY=-1;MODE=MYSQL;DATABASE_TO_UPPER=false");
