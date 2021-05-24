@@ -25,5 +25,5 @@ hs_err_pid*
 .idea/*
 target/*
 demo.iml
-src/main/resources/application.properties
-test/resources/application.properties
+src/main/resources/application_new.properties
+src/test/resources/application_new.properties

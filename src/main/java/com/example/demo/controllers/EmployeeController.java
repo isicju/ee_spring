@@ -37,7 +37,7 @@ public class EmployeeController {
 
     @PostMapping(value = "/report", produces = "application/pdf")
     public @ResponseBody
-    String getPdf(@Valid @RequestBody ReportRequest reportRequest) {
+    String getPdf(@RequestBody ReportRequest reportRequest) {
         EmployeeDetails employeeDetails =
                 userRepository.getEmployeeFullDetails(reportRequest.getEmployeeId());
         return pdfService.generatePdf(employeeDetails, reportRequest.getReportMessage());
