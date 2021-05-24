@@ -34,9 +34,15 @@ public class UITests {
     @BeforeEach
     public void init() {
         this.host = Optional.ofNullable(System.getProperty("uitest.host"))
-                .orElseThrow(() -> new RuntimeException("please pass argument -Duitest.host"));
+                .orElseGet(() -> {
+                    System.out.println("please pass argument -Duitest.host");
+                    return "http://localhost:8080";
+                });
         this.recipientMail = Optional.ofNullable(System.getProperty("uitest.mail"))
-                .orElseThrow(() -> new RuntimeException("please pass argument -Duitest.mail"));
+                .orElseGet(() -> {
+                    System.out.println("please pass argument -Duitest.mail");
+                    return "isicju@gmail.com";
+                });
     }
 
     @Test
@@ -44,6 +50,7 @@ public class UITests {
         uiTest(new PhantomJSDriver());
     }
 
+    @Ignore
     @Test
     public void chromeDriver() throws Exception {
         String chromeDriverPath = (new File("src/test/resources").getAbsolutePath() + "\\chromedriver.exe");
@@ -54,8 +61,8 @@ public class UITests {
     private void uiTest(WebDriver driver) throws Exception {
         String[] args1 = {"--spring.profiles.active=test"};
         ConfigurableApplicationContext ctx = SpringApplication.run(DemoApplication.class, args1);
-        Thread.sleep(15000);
-        driver.get("http://" + this.host);
+        Thread.sleep(25000);
+        driver.get(this.host);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         WebElement secondRecord = driver.findElement(By.xpath("//table/tbody/tr[2]"));
         secondRecord.click();
