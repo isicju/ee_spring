@@ -56,7 +56,7 @@ public class AppConfiguration {
         String port = System.getProperty("database_port");
 
         if (isEmpty(password) || isEmpty(user) || isEmpty(ip) || isEmpty(port)) {
-            throw new RuntimeException("password, user, ip, port has to be passed as ENVIRONMENT VARIABLE!");
+            throw new RuntimeException("database_password, database_user, database_ip, database_port has to be set as ENVIRONMENT VARIABLE!");
         }
 
         MysqlDataSource dataSource = new MysqlDataSource();
