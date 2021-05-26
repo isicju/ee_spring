@@ -67,6 +67,7 @@ public class AppConfiguration {
     }
 
     @Profile("test")
+    @Bean
     public DataSource embeddedDataSource() {
         log.info("initializing datasource h2 database...");
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
