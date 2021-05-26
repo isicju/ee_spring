@@ -1,4 +1,4 @@
-package com.example.demo.integration.services;
+package com.example.demo.services;
 
 import com.example.demo.dao.EmployeeDetails;
 import com.example.demo.services.PdfGeneratorService;
@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 @AutoConfigureMockMvc
 public class PdfGeneratorServiceTest {

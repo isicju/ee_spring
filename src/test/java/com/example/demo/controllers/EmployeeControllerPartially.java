@@ -1,4 +1,4 @@
-package com.example.demo.integration.controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.dao.EmployeeDetails;
 import com.example.demo.dao.UserRepository;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(MockitoJUnitRunner.class)

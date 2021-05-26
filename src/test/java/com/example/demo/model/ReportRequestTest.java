@@ -1,6 +1,5 @@
-package com.example.demo.unit;
+package com.example.demo.model;
 
-import com.example.demo.model.ReportRequest;
 import com.example.demo.validation.IllegalRequestInputException;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.example.demo.integration.services;
+package com.example.demo.services;
 
 import com.example.demo.services.MailService;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.mockito.ArgumentMatchers.any;
 
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 @AutoConfigureMockMvc
 class MailSenderTest {

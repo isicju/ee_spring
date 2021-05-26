@@ -1,4 +1,4 @@
-package com.example.demo.integration.controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.dao.Employee;
 import com.example.demo.dao.UserRepository;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 @AutoConfigureMockMvc
 class EmployeeControllerWithMocks {

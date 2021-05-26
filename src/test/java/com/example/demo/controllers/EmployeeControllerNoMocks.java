@@ -1,4 +1,4 @@
-package com.example.demo.integration.controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.dao.Employee;
 import com.example.demo.services.MailService;
@@ -15,14 +15,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 @AutoConfigureMockMvc
 class EmployeeControllerNoMocks {
