@@ -17,18 +17,18 @@ import java.util.Properties;
 @Configuration
 public class AppConfiguration  {
 
-    @Profile("prod")
-    @Bean
-    public DataSource prodDataSource() {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setPassword("secret_password");
-        dataSource.setUser("root");
-        dataSource.setURL("jdbc:mysql://51.124.98.77:3306/hr?useUnicode=true&serverTimezone=UTC");
-        return dataSource;
-    }
+//    @Profile("prod")
+//    @Bean
+//    public DataSource prodDataSource() {
+//        MysqlDataSource dataSource = new MysqlDataSource();
+//        dataSource.setPassword("secret_password");
+//        dataSource.setUser("root");
+//        dataSource.setURL("jdbc:mysql://51.124.98.77:3306/hr?useUnicode=true&serverTimezone=UTC");
+//        return dataSource;
+//    }
 
-    @Profile("test")
-    @Bean("h2DataSouce")
+//    @Profile("test")
+    @Bean()
     public DataSource embeddedDataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
